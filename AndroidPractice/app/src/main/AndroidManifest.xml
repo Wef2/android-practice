@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
 
+    <uses-feature android:name="android.hardware.camera2"></uses-feature>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,8 +20,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UploadActivity" />
-        <activity android:name=".LocationActivity"></activity>
+        <activity
+            android:name=".UploadActivity"
+            android:label="사진" />
+        <activity
+            android:name=".LocationActivity"
+            android:label="위치 확인" />
     </application>
 
 </manifest>
