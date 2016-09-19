@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AndroidPractice</string>
+
+    <string name="api_key">2256fe6716866b57e0850b333b5b2dff</string>
 </resources>

@@ -16,7 +16,7 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UploadActivity extends AppCompatActivity {
+public class UploadActivity extends AppCompatActivity implements View.OnClickListener{
 
     public static final int CAMERA_REQUEST_CODE = 1;
 
@@ -62,5 +62,10 @@ public class UploadActivity extends AppCompatActivity {
             uriList.add(data.getData());
             adapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }
