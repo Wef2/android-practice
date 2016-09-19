@@ -2,8 +2,11 @@ package com.wef2.androidpractice;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.media.ExifInterface;
 import android.media.Image;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -37,6 +41,7 @@ public class MyAdpater extends RecyclerView.Adapter<MyAdpater.ViewHolder> {
     public void onBindViewHolder(MyAdpater.ViewHolder holder, final int position) {
         final Context context = holder.cardView.getContext();
         final Uri uri = uriList.get(position);
+
         holder.imageView.setImageURI(uriList.get(position));
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override

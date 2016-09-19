@@ -9,9 +9,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.wef2.androidpractice.IndoorActivity">
 
-    <ImageView
-        android:id="@+id/indoor_view"
+    <com.jiahuan.svgmapview.SVGMapView
+        android:id="@+id/map_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+    </com.jiahuan.svgmapview.SVGMapView>
+
+
 
 </RelativeLayout>
