@@ -16,9 +16,8 @@
 
             <ImageView
                 android:id="@+id/image_view"
-                android:scaleType="fitCenter"
-                android:layout_width="50dp"
-                android:layout_height="100dp" />
+                android:layout_width="80dp"
+                android:layout_height="130dp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -36,12 +35,14 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:layout_marginRight="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textStyle="bold"
                         android:text="촬영시각" />
 
                     <TextView
-                        android:id="@+id/timestamp_text_view"
+                        android:id="@+id/datetime_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="" />
@@ -54,15 +55,17 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:layout_marginRight="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textStyle="bold"
                         android:text="촬영자" />
 
                     <TextView
                         android:id="@+id/cameraman_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="" />
+                        android:text="관리자 A" />
 
                 </LinearLayout>
 

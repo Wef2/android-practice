@@ -2,11 +2,10 @@ package com.wef2.androidpractice;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.media.ExifInterface;
-import android.media.Image;
+import android.graphics.Bitmap;
+import android.graphics.Matrix;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.provider.MediaStore;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,9 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -24,10 +22,10 @@ import java.util.List;
  */
 public class MyAdpater extends RecyclerView.Adapter<MyAdpater.ViewHolder> {
 
-    private List<Uri> uriList;
+    private List<Information> informationList;
 
-    public MyAdpater(List<Uri> uriList) {
-        this.uriList = uriList;
+    public MyAdpater(List<Information> informationList) {
+        this.informationList = informationList;
     }
 
     @Override
@@ -40,21 +38,24 @@ public class MyAdpater extends RecyclerView.Adapter<MyAdpater.ViewHolder> {
     @Override
     public void onBindViewHolder(MyAdpater.ViewHolder holder, final int position) {
         final Context context = holder.cardView.getContext();
-        final Uri uri = uriList.get(position);
+        final Uri uri = informationList.get(position).getUri();
+        final int rotationDegree = informationList.get(position).getRotationDegree();
 
-        holder.imageView.setImageURI(uriList.get(position));
+        holder.imageView.setImageURI(uri);
+        holder.datetimeTextView.setText(informationList.get(position).getDatetime());
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ImageActivity.class);
                 intent.putExtra("uri", uri);
+                intent.putExtra("degree", rotationDegree);
                 context.startActivity(intent);
             }
         });
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uriList.remove(position);
+                informationList.remove(position);
                 notifyDataSetChanged();
             }
         });
@@ -63,19 +64,21 @@ public class MyAdpater extends RecyclerView.Adapter<MyAdpater.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return uriList.size();
+        return informationList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public CardView cardView;
         public ImageView imageView;
+        public TextView datetimeTextView;
         public Button deleteButton;
 
         public ViewHolder(View v) {
             super(v);
             cardView = (CardView) v.findViewById(R.id.card_view);
             imageView = (ImageView) v.findViewById(R.id.image_view);
+            datetimeTextView = (TextView) v.findViewById(R.id.datetime_text_view);
             deleteButton = (Button) v.findViewById(R.id.delete_button);
         }
     }

@@ -1,6 +1,9 @@
 package com.wef2.androidpractice;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -13,10 +16,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UploadActivity extends AppCompatActivity implements View.OnClickListener{
+public class UploadActivity extends AppCompatActivity {
 
     public static final int CAMERA_REQUEST_CODE = 1;
 
@@ -24,20 +29,20 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    private List<Uri> uriList;
+    private List<Information> informationList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload);
 
-        uriList = new ArrayList<>();
+        informationList = new ArrayList<>();
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new MyAdpater(uriList);
+        adapter = new MyAdpater(informationList);
         recyclerView.setAdapter(adapter);
     }
 
@@ -59,13 +64,14 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             Log.i("DATA", data.getDataString());
-            uriList.add(data.getData());
+            Information information = new Information();
+            Uri uri = data.getData();
+            information.setUri(uri);
+            information.setDatetime(MyApplication.getDatetimeFromUri(uri));
+            information.setRotationDegree(MyApplication.getRotationDegreeFromUri(uri));
+            informationList.add(information);
             adapter.notifyDataSetChanged();
         }
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
 }

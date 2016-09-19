@@ -17,12 +17,11 @@ public class AssetsHelper
             InputStreamReader inputReader = new InputStreamReader(context.getResources().getAssets().open(fileName));
             BufferedReader bufReader = new BufferedReader(inputReader);
             String line = "";
-            String Result = "";
+            String result = "";
             while ((line = bufReader.readLine()) != null)
-                Result += line;
-
-            System.out.print(Result);
-            return Result;
+                result += line;
+            System.out.print(result);
+            return result;
         }
         catch (Exception e)
         {
